@@ -56,6 +56,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     return (
+      // @ts-expect-error - ignore
       <motion.button
         onHoverStart={() => {
           buttonControls.start({ scale: 1.08, transition: { type: "spring", bounce: 0.65, duration: 0.625 } })
