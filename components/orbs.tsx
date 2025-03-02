@@ -181,7 +181,7 @@ const OrbComponent = () => {
       // Create color palette and orbs (same as before)
       const colorPalette = new ColorPalette();
       const orbs = [];
-      for (let i = 0; i < 8; i++) {
+      for (let i = 0; i < 10; i++) {
         const orb = new Orb(colorPalette.randomColor());
         app.stage.addChild(orb.graphics);
         orbs.push(orb);
