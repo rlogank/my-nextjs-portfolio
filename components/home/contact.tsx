@@ -29,25 +29,21 @@ const Contact = () => {
       name: "GitHub",
       link: "https://github.com/rlogank",
       icon: <FaGithub />,
-      color: "text-[#333] hover:text-[#222]",
     },
     {
       name: "LinkedIn",
       link: "https://www.linkedin.com/in/rlogank/",
       icon: <FaLinkedin />,
-      color: "text-[#0a66c2] hover:text-[#004182]",
     },
     {
       name: "X",
       link: "https://x.com/rlogank",
       icon: <SiX />,
-      color: "text-[#1da1f2] hover:text-[#1a91da]",
     },
     {
       name: "Email",
       link: "mailto:rlogank@icloud.com",
       icon: <FaEnvelope />,
-      color: "text-emerald-500 hover:text-emerald-600",
     },
   ];
 
@@ -110,8 +106,13 @@ const Contact = () => {
                     key={socialLink.link}
                     href={socialLink.link}
                     target="_blank"
+                    aria-label={socialLink.name}
                   >
-                    <Button variant="secondary" size="icon">
+                    <Button
+                      variant="secondary"
+                      size="icon"
+                      aria-label={socialLink.name}
+                    >
                       {socialLink.icon}
                     </Button>
                   </Link>
@@ -123,7 +124,12 @@ const Contact = () => {
             <form autoComplete="off" onSubmit={handleSubmit(sendEmail)}>
               <div className="flex flex-col gap-4 sm:flex-row">
                 <div className="flex w-full flex-col gap-1 lg:w-1/2">
-                  <Label className="text-sm font-medium opacity-75">Name</Label>
+                  <Label
+                    htmlFor="name"
+                    className="text-sm font-medium opacity-75"
+                  >
+                    Name
+                  </Label>
                   <Input
                     type="text"
                     id="name"
@@ -136,7 +142,10 @@ const Contact = () => {
                   )}
                 </div>
                 <div className="flex w-full flex-col gap-1 lg:w-1/2">
-                  <Label className="text-sm font-medium opacity-75">
+                  <Label
+                    htmlFor="email"
+                    className="text-sm font-medium opacity-75"
+                  >
                     Email
                   </Label>
                   <Input
@@ -159,7 +168,10 @@ const Contact = () => {
                 </div>
               </div>
               <div className="my-5 flex flex-col gap-1">
-                <Label className="text-sm font-medium opacity-75">
+                <Label
+                  htmlFor="message"
+                  className="text-sm font-medium opacity-75"
+                >
                   Message
                 </Label>
                 <Textarea

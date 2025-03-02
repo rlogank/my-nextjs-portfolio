@@ -28,9 +28,9 @@ const Footer = () => {
         </div>
         {Object.keys(navLinks).map((key) => (
           <div key={key}>
-            <h3 className="mb-3 font-bold">
+            <h2 className="mb-3 font-bold">
               {key === "quickLinks" ? "Quick Links" : "Socials"}
-            </h3>
+            </h2>
             {key === "quickLinks" ? (
               <ul>
                 {navLinks[key as keyof typeof navLinks].map((link) => (
@@ -45,7 +45,7 @@ const Footer = () => {
                         {"icon" in link ? link.icon : link.name}
                       </a>
                     ) : (
-                      <Link href={link.href}>
+                      <Link href={link.href} aria-label={link.name}>
                         {"icon" in link ? link.icon : link.name}
                       </Link>
                     )}
@@ -60,6 +60,7 @@ const Footer = () => {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={link.name}
                   >
                     {"icon" in link ? link.icon : link.name}
                   </Link>

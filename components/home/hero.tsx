@@ -16,12 +16,12 @@ export default function Hero() {
           developer specializing in making clean, performant applications with
           modern frameworks and libraries.
         </p>
-        <div className="flex gap-4">
+        <div className="flex gap-2">
           <Link href="mailto:rlogank@icloud.com">
             <Button className="mx-auto">Contact me</Button>
           </Link>
-          <Link href="/files/logan-keene-resume.pdf" target="_blank">
-            <Button variant="ghost" className="mx-auto hover:bg-background">
+          <Link href="logan-keene-resume.pdf" target="_blank">
+            <Button variant="ghost" className="mx-auto hover:bg-background transition-colors">
               See my resume <FaArrowRight className="!w-3" />
             </Button>
           </Link>
