@@ -20,11 +20,11 @@ export default function Hero() {
           <Link href="mailto:rlogank@icloud.com">
             <Button className="mx-auto">Contact me</Button>
           </Link>
-          <Link href="logan-keene-resume.pdf" target="_blank">
+          <a href="logan-keene-resume.pdf" target="_blank" rel="noreferrer">
             <Button variant="ghost" className="mx-auto hover:bg-background transition-colors">
               See my resume <FaArrowRight className="!w-3" />
             </Button>
-          </Link>
+          </a>
         </div>
       </div>
     </section>

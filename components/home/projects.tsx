@@ -18,6 +18,8 @@ export default function Projects() {
               href={project.url}
               target="_blank"
               key={project.name}
+              rel="noopener noreferrer"
+              aria-label={project.name}
               className="flex flex-col justify-between rounded-3xl border bg-background p-8"
             >
               <div>
