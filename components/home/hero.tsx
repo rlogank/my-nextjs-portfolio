@@ -6,10 +6,10 @@ import { FaArrowRight } from "react-icons/fa";
 
 export default function Hero() {
   return (
-    <section className="relative z-10" id="hero">
+    <section className="relative z-10 mb-12" id="hero">
       <div className="mx-auto flex max-w-screen-xl flex-col items-center justify-center px-4">
         <h2 className="mx-auto mb-7 max-w-[666px] text-center text-4xl font-bold sm:text-6xl lg:text-7xl">
-          Web developer, software engineer, AI API Builder.
+          Web developer,<br/> software engineer,<br/> AI API Builder.
         </h2>
         <p className="mx-auto mb-7 max-w-2xl text-center text-lg">
           With 15+ years of experience, I am a passionate full-stack web
