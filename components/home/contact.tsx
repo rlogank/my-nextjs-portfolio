@@ -95,7 +95,7 @@ const Contact = () => {
             <h2 className="mb-3 text-3xl font-bold tracking-tight lg:text-4xl">
               {"Let's talk"}
             </h2>
-            <p className="text-sm opacity-60 lg:text-base">
+            <p className="">
               My inbox is always open. Whether you have a question or just want
               to say hi, I will get back to you!
             </p>
