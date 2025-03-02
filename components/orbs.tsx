@@ -18,10 +18,19 @@ const OrbComponent = () => {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    
+    // Check if the device is mobile based on window width
+    if (window.innerWidth <= 768) {
+      return;
+    }
 
-    const random = (min, max) => Math.random() * (max - min) + min;
-    const map = (n, start1, end1, start2, end2) =>
-      ((n - start1) / (end1 - start1)) * (end2 - start2) + start2;
+    const random = (min, max) => {
+      return Math.random() * (max - min) + min;
+    };
+
+    const map = (n, start1, end1, start2, end2) => {
+      return ((n - start1) / (end1 - start1)) * (end2 - start2) + start2;
+    };
 
     // Create a new simplex noise instance
     const simplex = new SimplexNoise();
@@ -46,12 +55,12 @@ const OrbComponent = () => {
         this.complimentaryColor1 = hsl(
           this.complimentaryHue1,
           this.saturation,
-          this.lightness
+          this.lightness,
         );
         this.complimentaryColor2 = hsl(
           this.complimentaryHue2,
           this.saturation,
-          this.lightness
+          this.lightness,
         );
 
         // Store color choices
@@ -65,7 +74,7 @@ const OrbComponent = () => {
       randomColor() {
         return this.colorChoices[~~random(0, this.colorChoices.length)].replace(
           "#",
-          "0x"
+          "0x",
         );
       }
 
@@ -73,11 +82,11 @@ const OrbComponent = () => {
         document.documentElement.style.setProperty("--hue", this.hue);
         document.documentElement.style.setProperty(
           "--hue-complimentary1",
-          this.complimentaryHue1
+          this.complimentaryHue1,
         );
         document.documentElement.style.setProperty(
           "--hue-complimentary2",
-          this.complimentaryHue2
+          this.complimentaryHue2,
         );
       }
     }
@@ -143,7 +152,7 @@ const OrbComponent = () => {
           -1,
           1,
           this.bounds.y.min,
-          this.bounds.y.max / 2
+          this.bounds.y.max / 2,
         );
         this.scale = map(scaleNoise, -1, 1, 0.5, 1);
 
@@ -157,65 +166,45 @@ const OrbComponent = () => {
         this.graphics.x = this.x;
         this.graphics.y = this.y;
         this.graphics.scale.set(this.scale);
+        // No need to clear and redraw the circle
       }
     }
 
-    const canvas = document.querySelector(".orb-canvas");
-    const isMobile = window.innerWidth < 768;
-    const resolution = isMobile ? 1 : window.devicePixelRatio;
-
-    // Create PixiJS application with adaptive resolution
+    // Create PixiJS application
     const app = new PIXI.Application({
-      view: canvas,
+      view: document.querySelector(".orb-canvas"),
       resizeTo: window, // Automatically resize to fit the window
-      backgroundAlpha: 0.0,
+      transparent: true,
       height: 1600, // Fixed canvas height
-      resolution,
     });
-
-    // Create and apply the KawaseBlurFilter with tuned parameters
-    const blurAmount = isMobile ? 15 : 25;
-    const blurQuality = isMobile ? 4 : 8;
-    const blurFilter = new KawaseBlurFilter(blurAmount, blurQuality, true);
-    app.stage.filters = [blurFilter];
 
     // Create color palette
     const colorPalette = new ColorPalette();
 
-    // Create orbs with fewer instances on mobile
-    const orbCount = isMobile ? 5 : 10;
+    // Adjust blur filter parameters as per CodePen visual differences
+    app.stage.filters = [new KawaseBlurFilter(30, 10, true)];
+
+    // Create orbs
     const orbs = [];
 
-    for (let i = 0; i < orbCount; i++) {
+    for (let i = 0; i < 10; i++) {
       const orb = new Orb(colorPalette.randomColor());
-      // Adjust animation speed on mobile
-      orb.inc = isMobile ? 0.0015 : 0.002;
       app.stage.addChild(orb.graphics);
       orbs.push(orb);
     }
 
     // Handle window resize with a single event listener
-    let lastWidth = window.innerWidth;
-    let lastHeight = window.innerHeight;
-
     window.addEventListener(
       "resize",
       debounce(() => {
-        const currentWidth = window.innerWidth;
-        const currentHeight = window.innerHeight;
-        // Only trigger update if dimensions change significantly (change threshold: 50px)
-        if (
-          Math.abs(currentWidth - lastWidth) > 50 ||
-          Math.abs(currentHeight - lastHeight) > 50
-        ) {
-          lastWidth = currentWidth;
-          lastHeight = currentHeight;
-          app.renderer.resize(currentWidth, 1000);
-          for (const orb of orbs) {
-            orb.bounds = orb.setBounds();
-          }
+        // Adjust canvas width on resize
+        app.renderer.resize(window.innerWidth, 1000);
+
+        // Update orb bounds
+        for (const orb of orbs) {
+          orb.bounds = orb.setBounds();
         }
-      }, 250)
+      }, 250),
     );
 
     // Animation loop
@@ -236,7 +225,7 @@ const OrbComponent = () => {
 
   return (
     <div
-      className="absolute top-0 min-h-[calc(100vh)] w-full overflow-x-hidden lg:blur-3xl"
+      className="absolute top-0 min-h-[calc(100vh)] w-full overflow-x-hidden"
       data-aos="fade-in"
     >
       <canvas className="orb-canvas" />
