@@ -177,7 +177,7 @@ const OrbComponent = () => {
     const colorPalette = new ColorPalette();
 
     // Adjust blur filter parameters as per CodePen visual differences
-    app.stage.filters = [new KawaseBlurFilter(30, 10, true)];
+    // app.stage.filters = [new KawaseBlurFilter(25, 8, true)];
 
     // Create orbs
     const orbs = [];
@@ -220,7 +220,7 @@ const OrbComponent = () => {
 
   return (
     <div
-      className="absolute top-0 min-h-[calc(100vh)] w-full overflow-x-hidden"
+      className="absolute top-0 min-h-[calc(100vh)] w-full overflow-x-hidden blur-3xl"
       data-aos="fade-in"
     >
       <canvas className="orb-canvas" />
