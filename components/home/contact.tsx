@@ -87,7 +87,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="relative flex items-center overflow-hidden"
+      className="relative flex items-center"
     >
       <div className="mx-auto w-full max-w-screen-xl">
         <div className="flex w-full flex-col gap-10 lg:flex-row lg:gap-16">
