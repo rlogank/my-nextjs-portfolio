@@ -5,6 +5,7 @@
 
 import React, { useEffect, useRef } from "react";
 import * as PIXI from "pixi.js";
+import { utils } from "pixi.js";
 import { KawaseBlurFilter } from "@pixi/filter-kawase-blur";
 import SimplexNoise from "simplex-noise";
 import hsl from "hsl-to-hex";
@@ -14,6 +15,10 @@ const OrbComponent = () => {
   const appRef = useRef<PIXI.Application | null>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
+  // Suppress console messages
+  utils.skipHello();
+  PIXI.settings.DEBUG = false;
+  
   useEffect(() => {
     if (typeof window === "undefined") return;
 
@@ -167,7 +172,7 @@ const OrbComponent = () => {
       const app = new PIXI.Application({
         view: document.querySelector(".orb-canvas") as HTMLCanvasElement,
         resizeTo: window,
-        transparent: true,
+        backgroundAlpha: 0, // updated from transparent: true
         height: 1600,
       });
       app.stage.filters = [new KawaseBlurFilter(30, 10, true)];
@@ -176,7 +181,7 @@ const OrbComponent = () => {
       // Create color palette and orbs (same as before)
       const colorPalette = new ColorPalette();
       const orbs = [];
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 8; i++) {
         const orb = new Orb(colorPalette.randomColor());
         app.stage.addChild(orb.graphics);
         orbs.push(orb);
