@@ -21,7 +21,7 @@ export default function Hero() {
             <Button className="mx-auto">Contact me</Button>
           </Link>
           <a href="logan-keene-resume.pdf" target="_blank" rel="noreferrer">
-            <Button variant="ghost" className="mx-auto hover:bg-background transition-colors">
+            <Button variant="ghost" className="mx-auto hover:bg-transparent">
               See my resume <FaArrowRight className="!w-3" />
             </Button>
           </a>
