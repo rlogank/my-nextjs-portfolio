@@ -195,12 +195,25 @@ const OrbComponent = () => {
     }
 
     // Handle window resize with a single event listener
+    let lastWidth = window.innerWidth;
+    let lastHeight = window.innerHeight;
+
     window.addEventListener(
       "resize",
       debounce(() => {
-        app.renderer.resize(window.innerWidth, 1000);
-        for (const orb of orbs) {
-          orb.bounds = orb.setBounds();
+        const currentWidth = window.innerWidth;
+        const currentHeight = window.innerHeight;
+        // Only trigger update if dimensions change significantly (change threshold: 50px)
+        if (
+          Math.abs(currentWidth - lastWidth) > 50 ||
+          Math.abs(currentHeight - lastHeight) > 50
+        ) {
+          lastWidth = currentWidth;
+          lastHeight = currentHeight;
+          app.renderer.resize(currentWidth, 1000);
+          for (const orb of orbs) {
+            orb.bounds = orb.setBounds();
+          }
         }
       }, 250)
     );
